@@ -6,42 +6,36 @@ import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ThreeDots } from "react-loader-spinner";
+import { signIn } from "next-auth/react";
 
-function SignupPage(): JSX.Element {
+function SigninPage(): JSX.Element {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rePassword, setRePassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
-  const signupHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const signinHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (password !== rePassword) {
-      toast.error("رمز عبور با تکرار آن مطابقت ندارد");
-      return;
-    }
     setLoading(true);
-    const res = await fetch("api/auth/signup", {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-type": "application/json" },
-    });
-
-    const data = await res.json();
+    const res = await signIn("credentials",{
+        email,
+        password,
+        redirect:false
+    })
     setLoading(false);
 
-    if (res.status === 201) {
-      router.push("/signin");
+    if (res?.error) {
+        toast.error(res.error);
     } else {
-      toast.error(data.error);
+      router.push("/")
     }
   };
 
   return (
     <>
       <div className={styles.form}>
-        <h4>فرم ثبت نام</h4>
+        <h4>فرم ورود</h4>
         <form>
           <label>ایمیل</label>
           <input
@@ -59,17 +53,9 @@ function SignupPage(): JSX.Element {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label>تکرار رمز عبور</label>
-          <input
-            name="rePassword"
-            id="rePassword"
-            type="password"
-            value={rePassword}
-            onChange={(e) => setRePassword(e.target.value)}
-          />
           {!loading ? (
-            <button onClick={(e) => signupHandler(e)} type="submit">
-              ثبت نام
+            <button onClick={(e) => signinHandler(e)} type="submit">
+               ورود
             </button>
           ) : (
             <ThreeDots
@@ -82,8 +68,8 @@ function SignupPage(): JSX.Element {
           )}
         </form>
         <p>
-          حساب کاربری دارید؟
-          <Link href="/signin">ورود</Link>
+          حساب کاربری ندارید؟
+          <Link href="/signup">ثبت نام</Link>
         </p>
         <Toaster />
       </div>
@@ -91,4 +77,4 @@ function SignupPage(): JSX.Element {
   );
 }
 
-export default SignupPage;
+export default SigninPage;

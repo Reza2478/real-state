@@ -1,20 +1,22 @@
 import NextAuth from "next-auth/next";
-import { CredentialsProvider } from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/models/User";
 import { verifyPassword } from "@/utils/auth";
 import connectDB from "@/utils/connectDB";
-import { AuthOptions } from "next-auth";
+import { NextAuthOptions } from "next-auth";
 
-interface Credentials extends Record<"email" | "password", string> {}
-
-const authOptions: AuthOptions = {
+const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   providers: [
-    // @ts-ignore
     CredentialsProvider({
-      async authorize(credentials: Credentials) {
-        const { email, password } = credentials;
-
+      name: "Credentials",
+      credentials: {
+        email: {
+          label: "Email",
+        },
+        password: { label: "Password" },
+      },
+      async authorize(credentials): Promise<any> {
         try {
           await connectDB();
         } catch (error) {
@@ -22,19 +24,22 @@ const authOptions: AuthOptions = {
           throw new Error("مشکلی در سمت سرور رخ داده است");
         }
 
-        if (!email || !password) {
+        if (!credentials?.email || !credentials.password) {
           throw new Error("لطفا اطلاعات معتبر را وارد کنید");
         }
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: credentials.email });
 
         if (!user) throw new Error("لطفا ابتدا حساب کاربری ایجاد کنید");
 
-        const isValid = await verifyPassword(password, user.password);
+        const isValid = await verifyPassword(
+          credentials.password,
+          user.password
+        );
 
         if (!isValid) throw new Error("ایمیل یا رمز عبور اشتباه است");
 
-        return { email };
+        return { email: credentials.email };
       },
     }),
   ],

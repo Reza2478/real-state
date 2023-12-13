@@ -1,9 +1,7 @@
-import React from 'react'
+import SignupPage from "@/template/SignupPage";
 
-function page():JSX.Element {
-  return (
-    <div>page</div>
-  )
+function SignUp(): JSX.Element {
+  return <SignupPage />;
 }
 
-export default page
+export default SignUp;

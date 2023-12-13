@@ -4,11 +4,9 @@ import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
 import { hashPassword } from "@/utils/auth";
 
-
-
-export async function POST(req:NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    await connectDB();  
+    await connectDB();
 
     const { email, password } = await req.json();
     if (!email || !password) {
@@ -17,14 +15,14 @@ export async function POST(req:NextRequest) {
         { status: 422 }
       );
     }
-    
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
         { error: "این حساب کاربری وجود دارد" },
         { status: 422 }
       );
-    } 
+    }
     const hashedPassword = await hashPassword(password);
 
     const newUser = await User.create({
@@ -32,8 +30,11 @@ export async function POST(req:NextRequest) {
       password: hashedPassword,
     });
 
-    console.log(newUser)
-    return NextResponse.json({ message: "حساب کاربری ایجاد شد" });
+    console.log(newUser);
+    return NextResponse.json(
+      { message: "حساب کاربری ایجاد شد" },
+      { status: 201 }
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
