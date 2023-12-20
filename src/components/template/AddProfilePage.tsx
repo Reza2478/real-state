@@ -5,6 +5,7 @@ import styles from "@/template/AddProfilePage.module.css";
 import TextInput from "@/module/TextInput";
 import RadioList from "@/module/RadioList";
 import TextList from "@/module/TextList";
+import CustomDatePicker from "@/module/CustomDatePicker";
 
 export interface ProfileData {
   title: string;
@@ -80,6 +81,7 @@ function AddProfilePage() {
       <RadioList profileData={profileData} setProfileData={setProfileData} />
       <TextList title="قوانین" profileData={profileData} setProfileData={setProfileData} type="rules"/>
       <TextList title="امکانات رفاهی" profileData={profileData} setProfileData={setProfileData} type="amenities"/>
+      <CustomDatePicker profileData={profileData} setProfileData={setProfileData}/>
       <button className={styles.submit} onClick={submitHandler}>
         ثبت آگهی
       </button>
