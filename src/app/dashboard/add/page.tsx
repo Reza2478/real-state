@@ -1,9 +1,8 @@
-import React from 'react'
+import AddProfilePage from "@/template/AddProfilePage";
+import React from "react";
 
 function page() {
-  return (
-    <div>page</div>
-  )
+  return <AddProfilePage />;
 }
 
-export default page
+export default page;
