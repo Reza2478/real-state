@@ -5,6 +5,21 @@ import { Types } from "mongoose";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET() {
+  try {
+    await connectDB();
+    const profiles = await Profile.find().select("-userId");
+
+    return NextResponse.json({ data: profiles }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "مشکل در سمت سرور رخ داده است" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
@@ -162,4 +177,3 @@ export async function PATCH(req: NextRequest) {
     );
   }
 }
-
