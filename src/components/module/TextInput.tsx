@@ -25,11 +25,12 @@ function TextInput(props: Props) {
     setProfileData({ ...profileData, [name]: p2e(value) });
   };
 
+
   return (
     <div className={styles.container}>
       <p>{title}</p>
       {textarea ? (
-        <textarea name={name} onChange={(e) => handleChange(e)} />
+        <textarea name={name}  value={profileData[name]} onChange={(e) => handleChange(e)} />
       ) : (
         <input
           type="text"

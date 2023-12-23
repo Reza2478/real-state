@@ -5,7 +5,7 @@ import styles from "@/template/Signup.module.css";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { ThreeDots } from "react-loader-spinner";
+import Loader from "@/module/Loader";
 
 function SignupPage(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -72,13 +72,7 @@ function SignupPage(): JSX.Element {
               ثبت نام
             </button>
           ) : (
-            <ThreeDots
-              color="#304ffe"
-              height={45}
-              ariaLabel="three-dots-loading"
-              visible={true}
-              wrapperStyle={{ margin: "auto" }}
-            />
+            <Loader/>
           )}
         </form>
         <p>

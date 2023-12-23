@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       password: hashedPassword,
     });
 
-    console.log(newUser);
+
     return NextResponse.json(
       { message: "حساب کاربری ایجاد شد" },
       { status: 201 }

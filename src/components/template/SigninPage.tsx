@@ -5,8 +5,8 @@ import styles from "@/template/Signup.module.css";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { ThreeDots } from "react-loader-spinner";
 import { signIn } from "next-auth/react";
+import Loader from "@/module/Loader";
 
 function SigninPage(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -18,15 +18,15 @@ function SigninPage(): JSX.Element {
   const signinHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    const res = await signIn("credentials",{
-        email,
-        password,
-        redirect:false
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false
     })
     setLoading(false);
 
     if (res?.error) {
-        toast.error(res.error);
+      toast.error(res.error);
     } else {
       router.push("/")
     }
@@ -55,15 +55,10 @@ function SigninPage(): JSX.Element {
           />
           {!loading ? (
             <button onClick={(e) => signinHandler(e)} type="submit">
-               ورود
+              ورود
             </button>
           ) : (
-            <ThreeDots
-              color="#304ffe"
-              height={45}
-              ariaLabel="three-dots-loading"
-              visible={true}
-              wrapperStyle={{ margin: "auto" }}
+            <Loader
             />
           )}
         </form>
