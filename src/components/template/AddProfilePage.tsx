@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import styles from "@/template/AddProfilePage.module.css";
 import TextInput from "@/module/TextInput";
 import RadioList from "@/module/RadioList";
 import TextList from "@/module/TextList";
 import CustomDatePicker from "@/module/CustomDatePicker";
+import toast, { Toaster } from "react-hot-toast";
 
 export interface ProfileData {
   title: string;
@@ -30,12 +31,26 @@ function AddProfilePage() {
     constractionDate: new Date(),
     category: "villa",
     rules: [],
-    amenities:[],
+    amenities: [],
     location: "",
   });
 
-  const submitHandler = () => {
-    console.log(profileData);
+  const submitHandler = async () => {
+    const res = await fetch("/api/profile", {
+      method: "POST",
+      body: JSON.stringify(profileData),
+      headers: { "Content-type": "application/json" },
+    });
+
+    const data = await res.json();
+
+    if (res.status === 201) {
+      toast.success(data.message)
+      
+    } else {
+      toast.error(data.error);
+    }
+
   };
 
   return (
@@ -79,12 +94,13 @@ function AddProfilePage() {
         profileData={profileData}
       />
       <RadioList profileData={profileData} setProfileData={setProfileData} />
-      <TextList title="قوانین" profileData={profileData} setProfileData={setProfileData} type="rules"/>
-      <TextList title="امکانات رفاهی" profileData={profileData} setProfileData={setProfileData} type="amenities"/>
-      <CustomDatePicker profileData={profileData} setProfileData={setProfileData}/>
+      <TextList title="قوانین" profileData={profileData} setProfileData={setProfileData} type="rules" />
+      <TextList title="امکانات رفاهی" profileData={profileData} setProfileData={setProfileData} type="amenities" />
+      <CustomDatePicker profileData={profileData} setProfileData={setProfileData} />
       <button className={styles.submit} onClick={submitHandler}>
         ثبت آگهی
       </button>
+      <Toaster />
     </div>
   );
 }
