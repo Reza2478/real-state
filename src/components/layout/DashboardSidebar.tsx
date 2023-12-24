@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/layout/DashboardSidebar.module.css";
 import { CgProfile } from "react-icons/cg";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/auth";
 import Link from "next/link";
 import LogoutBtn from "@/module/LogoutBtn";
 

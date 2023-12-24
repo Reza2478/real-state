@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/utils/auth"
 import User from "@/models/User"
 import MyProfilesPage from "@/template/MyProfilesPage"
 import connectDB from "@/utils/connectDB"
