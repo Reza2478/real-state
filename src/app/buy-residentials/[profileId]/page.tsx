@@ -1,4 +1,5 @@
 import { ProfileData } from "@/template/AddProfilePage";
+import DetailsPage from "@/template/DetailsPage";
 import React from "react";
 
 interface Props {
@@ -12,7 +13,6 @@ export async function generateStaticParams() {
   const data = await res.json();
   const allData: ProfileData[] = data.data;
   const params = allData.map((profile) => ({ profileId: String(profile._id) }));
-  console.log(params);
   
   return params;
 }
@@ -23,10 +23,8 @@ async function ProfileDetails(props: Props) {
   const res = await fetch(`http://localhost:3000/api/profile/${profileId}`);
   const data = await res.json();
   const details: ProfileData = data.data;
-  console.log(profileId);
-  
 
-  return <div>ProfileDetails-{details._id}</div>;
+  return <DetailsPage  details={details}/>
 }
 
 export default ProfileDetails;

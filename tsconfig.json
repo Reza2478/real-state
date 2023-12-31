@@ -29,6 +29,8 @@
       "@/template/*": ["src/components/template/*"],
       "@/providers/*": ["src/providers/*"],
       "@/api/*": ["src/app/api/*"],
+      "@/constants/*" :["src/constants/*"],
+      "@/interfaces/*" :["src/interfaces/*"]
     },
     
   },
