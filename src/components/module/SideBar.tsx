@@ -3,7 +3,7 @@ import styles from "@/module/SideBar.module.css";
 import { FaFilter } from "react-icons/fa6";
 import Link from "next/link";
 import { categories } from "@/constants/strings";
-import Categories from "@/interfaces/Categories";
+import Icons from "@/interfaces/Icons";
 
 
 function SideBar() {
@@ -21,7 +21,7 @@ function SideBar() {
           }}
           key={index}
         >
-          {categories[query as keyof Categories]}
+          {categories[query as keyof Icons]}
         </Link>
       ))}
     </div>

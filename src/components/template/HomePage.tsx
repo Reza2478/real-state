@@ -5,7 +5,7 @@ import { FiCircle } from "react-icons/fi";
 import CategoryCard from "@/module/CategoryCard";
 import { FaCity } from "react-icons/fa";
 import { categories, cities, services } from "@/constants/strings";
-import Categories from "@/interfaces/Categories";
+import Icons from "@/interfaces/Icons";
 
 function HomePage() {
   return (
@@ -25,7 +25,7 @@ function HomePage() {
       </div>
       <div className={styles.categories}>
         {Object.keys(categories).map((i) => (
-          <CategoryCard title={categories[i as keyof Categories]} name={i} />
+          <CategoryCard title={categories[i as keyof Icons]} name={i} />
         ))}
       </div>
       <div className={styles.city}>

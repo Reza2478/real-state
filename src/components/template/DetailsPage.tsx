@@ -12,7 +12,7 @@ import ShareButton from "@/module/ShareButton";
 import { categories } from "@/constants/strings";
 import { icons } from "@/constants/icons";
 import Icons from "@/interfaces/Icons";
-import Categories from "@/interfaces/Categories";
+
 
 interface Props {
   details: ProfileData;
@@ -62,7 +62,7 @@ function DetailsPage(props: Props) {
         <div className={styles.price}>
           <p>
             {icons[category as keyof Icons]}
-            {categories[category as keyof Categories]}
+            {categories[category as keyof Icons]}
           </p>
           <p>{sp(price)} تومان</p>
           <p>
