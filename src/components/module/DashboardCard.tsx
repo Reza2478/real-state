@@ -1,6 +1,6 @@
 "use client"
 
-import { ProfileData } from "@/template/AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import Card from "@/module/Card";
 import styles from "@/module/DashboardCard.module.css"
 import { FiEdit } from "react-icons/fi";

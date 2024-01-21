@@ -1,5 +1,5 @@
 import BuyResidentialsPage from '@/template/BuyResidentialsPage'
-import { ProfileData } from '@/template/AddProfilePage'
+import ProfileData  from '@/interfaces/ProfileData'
 
 interface Props {
   searchParams: {

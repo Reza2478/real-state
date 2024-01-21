@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "@/module/TextList.module.css";
-import { ProfileData } from "@/template/AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import { MdOutlineAddToPhotos } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 

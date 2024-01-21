@@ -8,21 +8,25 @@ import LogoutBtn from "@/module/LogoutBtn";
 
 interface Props {
   children: React.ReactNode;
+  role: string,
+  email: string
 }
 
-async function DashboardSidebar({ children }: Props) {
-  const session = await getServerSession(authOptions);
+async function DashboardSidebar({ children, role, email }: Props) {
 
   return (
     <div className={styles.container}>
       <div className={styles.sidebar}>
         <CgProfile />
-        <p>{session?.user?.email}</p>
+        {role === "ADMIN" && 'ادمین'}
+        <p>{email}</p>
         <span></span>
         <Link href="/dashboard">حساب کاربری</Link>
         <Link href="/dashboard/my-profiles">آگهی های من</Link>
         <Link href="/dashboard/add">ثبت آگهی</Link>
-        <LogoutBtn/>
+        {role === "ADMIN" && <Link href="/admin">در انتظار تایید</Link>}
+
+        <LogoutBtn />
       </div>
       <div className={styles.main}>{children}</div>
     </div>

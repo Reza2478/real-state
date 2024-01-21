@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/module/RadioList.module.css";
-import { ProfileData } from "@/template/AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
+
 
 interface Props {
   profileData: ProfileData;

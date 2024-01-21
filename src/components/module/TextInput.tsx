@@ -2,7 +2,7 @@
 
 import React from "react";
 import styles from "@/module/TextInput.module.css";
-import { ProfileData } from "@/template/AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import { p2e } from "@/utils/replaceNumber";
 
 interface Props {

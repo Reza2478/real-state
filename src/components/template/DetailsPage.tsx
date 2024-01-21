@@ -4,7 +4,7 @@ import { AiOutlinePhone } from "react-icons/ai";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BiCalendarCheck } from "react-icons/bi";
 import styles from "@/template/DetailsPage.module.css";
-import { ProfileData } from "./AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import ItemList from "@/module/ItemList";
 import Title from "@/module/title";
 import { e2p, sp } from "@/utils/replaceNumber";

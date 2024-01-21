@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "@/module/CustomDatePicker.module.css";
 import DatePicker from "react-multi-date-picker";
-import { ProfileData } from "@/template/AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 

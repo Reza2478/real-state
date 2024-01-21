@@ -1,4 +1,4 @@
-import { ProfileData } from "@/template/AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import styles from "@/module/Card.module.css";
 
 import { BiLeftArrowAlt } from "react-icons/bi";

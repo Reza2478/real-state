@@ -1,5 +1,5 @@
 import React from "react";
-import { ProfileData } from "./AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import styles from "@/template/BuyResidentialsPage.module.css";
 import Card from "@/module/Card";
 import SideBar from "@/module/SideBar";

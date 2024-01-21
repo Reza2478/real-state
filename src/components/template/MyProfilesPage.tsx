@@ -1,4 +1,4 @@
-import { ProfileData } from "./AddProfilePage";
+import ProfileData from "@/interfaces/ProfileData";
 import DashboardCard from "@/module/DashboardCard";
 import styles from "@/template/MyProfilesPage.module.css"
 

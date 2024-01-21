@@ -9,7 +9,7 @@ interface IParams extends ParsedUrlQuery {
   profileId: string;
 }
 
-export async function DELETE(req: NextRequest, context: ParsedUrlQuery) {
+export async function PATCH(req: NextRequest, context: ParsedUrlQuery) {
   try {
     await connectDB();
 
@@ -29,21 +29,19 @@ export async function DELETE(req: NextRequest, context: ParsedUrlQuery) {
       return NextResponse.json({ error: "کاربر یافت نشد" }, { status: 404 });
     }
 
-    const profile = await Profile.findOne({ _id: profileId });
-
-    if (user.role!=="ADMIN" && !user._id.equals(profile.userId)) {
+    if (user.role !== "ADMIN") {
       return NextResponse.json(
-        { error: "دسترسی شما به این آگهی محدود شده است" },
+        { error: "دسترسی شما به محدود شده است" },
         { status: 403 }
       );
     }
+    const profile = await Profile.findOne({ _id: profileId });
 
-    await Profile.deleteOne({ _id: profileId });
+    profile.published = true;
 
-    return NextResponse.json(
-      { message: "آگهی مورد نظر با موفقیت  حذف شد" },
-      { status: 200 }
-    );
+    profile.save();
+
+    return NextResponse.json({ message: "آگهی منتشر شد" }, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(
